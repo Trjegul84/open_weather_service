@@ -1,12 +1,11 @@
 from unittest.mock import ANY
 
 import pytest
-from app.main import app, lifespan, settings
-from app.models import User, WeatherData
-
 from fastapi import FastAPI, status
 from fastapi.testclient import TestClient
 
+from app.main import app, lifespan, settings
+from app.models import User, WeatherData
 
 settings.DB_NAME = "test"
 

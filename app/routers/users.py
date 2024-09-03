@@ -3,7 +3,6 @@ from pydantic import BaseModel
 
 from app.models import User, UserSchema
 
-
 router = APIRouter()
 
 

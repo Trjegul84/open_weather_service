@@ -1,5 +1,6 @@
-import requests
 import time
+
+import requests
 
 # Script to test GET endpoint in a terminal:
 

@@ -6,7 +6,6 @@ from botocore.exceptions import ClientError
 
 from app.settings import Settings
 
-
 logger = logging.getLogger(__name__)
 
 settings = Settings()

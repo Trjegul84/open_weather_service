@@ -8,7 +8,6 @@ from app.models import User, WeatherData
 from app.routers import data, users
 from app.settings import Settings
 
-
 settings = Settings()
 
 lifespan = LifespanManager()
