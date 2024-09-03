@@ -9,6 +9,8 @@ services:
       - "8000:8000"
     depends_on:
       - mongodb_beany
+    volumes:
+      - .:/code
     networks:
       - app-network
   mongodb_beany:
