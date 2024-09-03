@@ -28,10 +28,13 @@ You will be able to:
 * Get the progress percentage of the current post request
 """
 
+
 @lifespan.add
 async def init_db(app: FastAPI):
     client = AsyncIOMotorClient(settings.DB_URL)
-    await init_beanie(database=client[settings.DB_NAME], document_models=[User, WeatherData])
+    await init_beanie(
+        database=client[settings.DB_NAME], document_models=[User, WeatherData]
+    )
     yield
 
 
@@ -53,4 +56,4 @@ app.include_router(data.router)
 
 @app.get("/", include_in_schema=False)
 def redirect_root():
-    return RedirectResponse(url='/docs')
+    return RedirectResponse(url="/docs")
