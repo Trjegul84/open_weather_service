@@ -1,4 +1,3 @@
-
 from unittest.mock import ANY
 
 import pytest
@@ -45,6 +44,7 @@ def client():
 def non_existing_user_id():
     return "657cb8cf78775fe7635f6fff"
 
+
 @pytest.fixture
 def unique_request_user_id(client):
     user = create_user(client)
@@ -55,7 +55,7 @@ def unique_request_user_id(client):
 def save_post_request(client):
     user = create_user(client)
     user_id = user["id"]
-    client.post(f"/weather?user_id={user_id}", json='')
+    client.post(f"/weather?user_id={user_id}", json="")
     return user_id
 
 
@@ -64,37 +64,47 @@ def test_register_user(client):
 
 
 def test_collect_data_fails_when_user_does_not_exists(client, non_existing_user_id):
-    response = client.post(f"/weather?user_id={non_existing_user_id}", json='')
+    response = client.post(f"/weather?user_id={non_existing_user_id}", json="")
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert response.json() == dict(detail="User id does not exists.")
 
 
 def test_collect_data_fails_when_request_user_id_is_not_unique(client):
-    non_unique_user_id=save_post_request(client)
+    non_unique_user_id = save_post_request(client)
 
-    response = client.post(f"/weather?user_id={non_unique_user_id}", json='')
+    response = client.post(f"/weather?user_id={non_unique_user_id}", json="")
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
-    assert response.json() == dict(detail="User id was already used for a previous request.")
+    assert response.json() == dict(
+        detail="User id was already used for a previous request."
+    )
 
 
-def test_collect_data_responds_ok_when_request_user_id_is_unique(client, unique_request_user_id):
+def test_collect_data_responds_ok_when_request_user_id_is_unique(
+    client, unique_request_user_id
+):
 
-    response = client.post(f"/weather?user_id={unique_request_user_id}", json='')
+    response = client.post(f"/weather?user_id={unique_request_user_id}", json="")
 
     assert response.status_code == status.HTTP_201_CREATED
-    assert response.json() == dict(message="The current request is in progress, use the GET endpoint to know the status.")
+    assert response.json() == dict(
+        message="The current request is in progress, use the GET endpoint to know the status."
+    )
 
 
-def test_get_progress_percentage_fails_when_user_does_not_exists(client, non_existing_user_id):
+def test_get_progress_percentage_fails_when_user_does_not_exists(
+    client, non_existing_user_id
+):
     response = client.get(f"/weather/{non_existing_user_id}")
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert response.json() == dict(detail="User id does not exists.")
 
 
-def test_get_progress_percentage_fails_when_user_has_not_made_any_request(client, unique_request_user_id):
+def test_get_progress_percentage_fails_when_user_has_not_made_any_request(
+    client, unique_request_user_id
+):
     # User is created but no register in WeatherData document is linked to it
     response = client.get(f"/weather/{unique_request_user_id}")
 
