@@ -1,0 +1,14 @@
+uvicorn[standard]
+fastapi[all]==0.112.0
+pydantic
+pytest
+coverage
+requests
+pre-commit
+pydantic-settings>=2.1.0
+beanie>=1.23.6
+motor
+fastapi-lifespan-manager
+boto3
+botocore
+moto[all]

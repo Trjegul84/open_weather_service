@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file: ./.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb_beany
+    networks:
+      - app-network
+  mongodb_beany:
+    image: bitnami/mongodb:latest
+    ports:
+      - 27017:27017
+    environment:
+      ALLOW_EMPTY_PASSWORD: 1
+      MONGODB_DISABLE_ENFORCE_AUTH: 1
+    volumes:
+      - mongo_data:/bitnami/mongodb
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo_data:
