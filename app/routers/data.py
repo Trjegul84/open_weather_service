@@ -1,15 +1,15 @@
-from datetime import datetime
-#from app.checks import check_user_or_previous_request
-from beanie.odm.fields import PydanticObjectId
-from fastapi import APIRouter, HTTPException, status, Depends
-from pydantic import BaseModel
-import httpx
 import asyncio
+from datetime import datetime
 
-from app.models import  User, WeatherData
-from app.settings import cities
+import httpx
+
+from beanie.odm.fields import PydanticObjectId
+from fastapi import APIRouter, HTTPException, status
+from pydantic import BaseModel
+
+from app.models import User, WeatherData
 from app.secrets import get_secret
-
+from app.settings import cities
 
 router = APIRouter()
 

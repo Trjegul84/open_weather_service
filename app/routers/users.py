@@ -1,12 +1,7 @@
-from datetime import datetime
-from typing import List
-from itertools import chain
-
-from beanie.odm.fields import PydanticObjectId
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, status
 from pydantic import BaseModel
 
-from app.models import  User, UserSchema
+from app.models import User, UserSchema
 
 
 router = APIRouter()

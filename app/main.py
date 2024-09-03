@@ -1,21 +1,17 @@
-from typing import Union
-
 from beanie import init_beanie
 from fastapi import FastAPI
-from fastapi_lifespan_manager import LifespanManager
 from fastapi.responses import RedirectResponse
+from fastapi_lifespan_manager import LifespanManager
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from app.models import User, WeatherData
 from app.routers import data, users
-
 from app.settings import Settings
 
 
 settings = Settings()
 
 lifespan = LifespanManager()
-
 
 description = """
 Service connected with Open Weather API to collect weather data of cities
@@ -53,6 +49,7 @@ app = FastAPI(
 
 app.include_router(users.router)
 app.include_router(data.router)
+
 
 @app.get("/", include_in_schema=False)
 def redirect_root():

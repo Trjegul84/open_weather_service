@@ -1,10 +1,10 @@
 
+import boto3
+import pytest
 from app.secrets import get_secret
 from app.settings import Settings
-import pytest
-import boto3
-from moto import mock_aws
 from botocore.exceptions import ClientError
+from moto import mock_aws
 
 
 @pytest.fixture

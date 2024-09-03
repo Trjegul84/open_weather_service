@@ -1,8 +1,6 @@
-from typing import Optional, List
+from typing import List, Optional
 
 from beanie import Document, Link
-from beanie.odm.fields import PydanticObjectId
-
 from pydantic import BaseModel
 
 
@@ -12,10 +10,6 @@ class UserSchema(BaseModel):
 
 class User(Document):
     pass
-
-
-class UserId(BaseModel):
-    id: PydanticObjectId
 
 
 class WeatherDataModel(BaseModel):

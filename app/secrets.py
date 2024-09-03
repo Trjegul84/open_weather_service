@@ -1,10 +1,11 @@
-import boto3
 import json
 import logging
 
+import boto3
 from botocore.exceptions import ClientError
 
 from app.settings import Settings
+
 
 logger = logging.getLogger(__name__)
 
